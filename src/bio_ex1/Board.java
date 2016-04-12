@@ -3,19 +3,18 @@ package bio_ex1;
 import java.util.Random;
 
 public class Board {
-	int size;
-	boolean[][] board;
+	private final static int DEF_SIZE = 100;
+	private final static float DEF_PROBABILITY = 0.5;
+
+	private int size;
+	private boolean[][] board;
 	
 	public Board(){
-		this.size = 100;
-		this.board = new boolean[size][size];
-		init(0.5);
+		this(DEF_SIZE,DEF_PROBABILITY);
 	}
 	
 	public Board(int size) {
-		this.size = size;
-		this.board = new boolean[size][size];
-		init(0.5);
+		this(size,DEF_PROBABILITY);
 	}
 	
 	public Board(int size, double prob) {
@@ -27,8 +26,7 @@ public class Board {
 	private void init(double prob){
 		for(int i=0; i < size; i++) {
 			for(int j=0; j< size; j++) {
-				Random rand = new Random(); 
-				if((rand.nextInt(100) < (prob * 100))) {
+				if(getRand() < prob) {
 					 board[i][j] = true;
 				} else {
 					 board[i][j] = false;
@@ -36,7 +34,10 @@ public class Board {
 			}
 		}
 	}
-	
+	private float getRand() {
+		Random r = new Random();
+		return r.getFloat();
+	}
 	public void draw() {
 		String baordLayout ="";
 		for(int i=0; i<this.size; i++) {
@@ -56,6 +57,7 @@ public class Board {
 	}
 	
 	public void step(int generation, boolean wrap){
+		position = position % size;
 		int step_type = generation % 2;
 		for(int i=step_type; i<size-1; i=i+2) {
 			for(int j=step_type; j<size-1; j=j+2) {
