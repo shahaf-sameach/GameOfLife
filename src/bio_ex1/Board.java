@@ -9,20 +9,26 @@ public class Board {
 	public Board(){
 		this.size = 100;
 		this.board = new boolean[size][size];
-		init();
+		init(0.5);
 	}
 	
 	public Board(int size) {
 		this.size = size;
 		this.board = new boolean[size][size];
-		init();
+		init(0.5);
 	}
 	
-	private void init(){
+	public Board(int size, double prob) {
+		this.size = size;
+		this.board = new boolean[size][size];
+		init(prob);
+	}
+	
+	private void init(double prob){
 		for(int i=0; i < size; i++) {
 			for(int j=0; j< size; j++) {
 				Random rand = new Random(); 
-				if((rand.nextInt(2)) == 1) {
+				if((rand.nextInt(100) < (prob * 100))) {
 					 board[i][j] = true;
 				} else {
 					 board[i][j] = false;
