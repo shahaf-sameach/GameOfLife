@@ -1,84 +1,121 @@
 package bio_ex1;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.EventQueue;
 
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import java.awt.GridBagLayout;
+import javax.swing.JButton;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.JCheckBox;
 
-public class Main extends JFrame implements ActionListener{
+public class Main {
 
-	private static final long serialVersionUID = 1L;
-	
+	private JFrame frame;
+	private JTextField txtBoardSize;
+	private JTextField txtProb;
+	private JTextField txtStepNumber;
+	private JTextField txtStepDuration;
+	private JCheckBox chckbxWraparound;
+
+	/**
+	 * Launch the application.
+	 */
 	public static void main(String[] args) {
-		new Main().setVisible(true);
-	}
-	
-	private Main() {
-		super("Game of life");
-		setSize(400, 300);
-		setResizable(true);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLayout(new FlowLayout());
-		
-		JButton submit = new JButton("Submit");
-		submit.addActionListener(this);
-		
-		JTextField size = new JTextField(10);
-		JLabel sizeText = new JLabel();        
-		sizeText.setText ("Please choose size of board:");
-		
-		JTextField steps = new JTextField(10);
-		JLabel stepsText = new JLabel();        
-		stepsText.setText ("Please choose number of steps:");
-		
-		JTextField wait = new JTextField(10);
-		JLabel waitText = new JLabel();        
-		waitText.setText ("Please choose time for wait:");
-		
-		JTextField random = new JTextField(10);
-		JLabel randomText = new JLabel();        
-		randomText.setText ("Please choose option for random:");
-		
-		JCheckBox wraparound = new JCheckBox("Wraparound");
-		
-	    add(sizeText);
-		add(size, BorderLayout.PAGE_START);
-		add(stepsText);
-		add(steps, BorderLayout.CENTER);
-		add(waitText);
-		add(wait, BorderLayout.PAGE_END);
-		add(randomText);
-        add(random, BorderLayout.PAGE_END);
-        add(wraparound, BorderLayout.PAGE_END);
-		add(submit, BorderLayout.PAGE_END);
-		
-//		theHandler handler = new theHandler();
-//		submit.addActionListener(handler);
-//		size.addActionListener(handler);
-//		steps.addActionListener(handler);
-//		wait.addActionListener(handler);
-//		wraparound.addActionListener(handler);
-//		
-//		private class theHandler implements ActionListener {
-//			
-//			public void actionPerformed(ActionEvent event) {
-//				if(event.getSource() == submit) {
-//					
-//				}
-//			}
-//		}
-		
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Main window = new Main();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		System.out.println("Hello");
+	/**
+	 * Create the application.
+	 */
+	public Main() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
 		
+		JButton btnRun = new JButton("run");
+		btnRun.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int board_size = Integer.parseInt(txtBoardSize.getText());
+				double prob = Double.parseDouble(txtProb.getText());
+				int step_num = Integer.parseInt(txtStepNumber.getText());
+				double duration = Double.parseDouble(txtStepDuration.getText());
+				boolean wraparound = chckbxWraparound.isSelected();
+				BoardView board_view = new BoardView(board_size, prob, step_num, duration, wraparound);
+				board_view.setVisible(true);
+			}
+		});
+		btnRun.setBounds(48, 213, 117, 29);
+		frame.getContentPane().add(btnRun);
+		
+		JLabel lblBoardSize = new JLabel("Board Size:");
+		lblBoardSize.setBounds(6, 17, 77, 16);
+		frame.getContentPane().add(lblBoardSize);
+		
+		txtBoardSize = new JTextField();
+		txtBoardSize.setBounds(78, 11, 45, 28);
+		frame.getContentPane().add(txtBoardSize);
+		txtBoardSize.setColumns(10);
+		txtBoardSize.setText("100");
+		
+		JLabel lblFillProb = new JLabel("Init Prob");
+		lblFillProb.setBounds(6, 56, 61, 16);
+		frame.getContentPane().add(lblFillProb);
+		
+		txtProb = new JTextField();
+		txtProb.setBounds(78, 50, 134, 28);
+		frame.getContentPane().add(txtProb);
+		txtProb.setColumns(10);
+		txtProb.setText("0.5");
+		
+		JLabel lblStepNo = new JLabel("Step No:");
+		lblStepNo.setBounds(6, 104, 61, 16);
+		frame.getContentPane().add(lblStepNo);
+		
+		txtStepNumber = new JTextField();
+		txtStepNumber.setText("stepNo");
+		txtStepNumber.setBounds(78, 98, 134, 28);
+		frame.getContentPane().add(txtStepNumber);
+		txtStepNumber.setColumns(10);
+		txtStepNumber.setText("-1");
+		
+		JLabel lblStepDuration = new JLabel("Step Duration");
+		lblStepDuration.setBounds(6, 150, 61, 16);
+		frame.getContentPane().add(lblStepDuration);
+		
+		txtStepDuration = new JTextField();
+		txtStepDuration.setText("step duration");
+		txtStepDuration.setBounds(78, 144, 134, 28);
+		frame.getContentPane().add(txtStepDuration);
+		txtStepDuration.setColumns(10);
+		txtStepDuration.setText("0.5");
+		
+		chckbxWraparound = new JCheckBox("wraparound");
+		chckbxWraparound.setBounds(6, 184, 128, 23);
+		frame.getContentPane().add(chckbxWraparound);
+		
+
+
 	}
 }
