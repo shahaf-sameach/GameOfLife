@@ -21,13 +21,14 @@ public class Main extends JFrame implements ActionListener{
 	
 	private Main() {
 		super("Game of life");
-		setSize(600, 600);
+		setSize(400, 300);
 		setResizable(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
 		
 		JButton submit = new JButton("Submit");
 		submit.addActionListener(this);
+		
 		JTextField size = new JTextField(10);
 		JLabel sizeText = new JLabel();        
 		sizeText.setText ("Please choose size of board:");
@@ -40,18 +41,38 @@ public class Main extends JFrame implements ActionListener{
 		JLabel waitText = new JLabel();        
 		waitText.setText ("Please choose time for wait:");
 		
-		JCheckBox wraparound = new JCheckBox("Wraparound");
-        add(wraparound);
+		JTextField random = new JTextField(10);
+		JLabel randomText = new JLabel();        
+		randomText.setText ("Please choose option for random:");
 		
-		add(submit, BorderLayout.PAGE_END);
+		JCheckBox wraparound = new JCheckBox("Wraparound");
+		
 	    add(sizeText);
-		add(size, BorderLayout.NORTH);
+		add(size, BorderLayout.PAGE_START);
 		add(stepsText);
 		add(steps, BorderLayout.CENTER);
 		add(waitText);
-		add(wait, BorderLayout.CENTER);
+		add(wait, BorderLayout.PAGE_END);
+		add(randomText);
+        add(random, BorderLayout.PAGE_END);
+        add(wraparound, BorderLayout.PAGE_END);
+		add(submit, BorderLayout.PAGE_END);
 		
-//		int sizeOfBoard = Integer.parseInt(size.getText());
+//		theHandler handler = new theHandler();
+//		submit.addActionListener(handler);
+//		size.addActionListener(handler);
+//		steps.addActionListener(handler);
+//		wait.addActionListener(handler);
+//		wraparound.addActionListener(handler);
+//		
+//		private class theHandler implements ActionListener {
+//			
+//			public void actionPerformed(ActionEvent event) {
+//				if(event.getSource() == submit) {
+//					
+//				}
+//			}
+//		}
 		
 	}
 
