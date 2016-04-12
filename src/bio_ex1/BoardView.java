@@ -14,11 +14,15 @@ import javax.swing.JLabel;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
 
 public class BoardView extends JFrame {
 
 	private JPanel contentPane;
 	private JLabel lblGenerationValue;
+	private Board game;
+	private boolean wrap_around;
 
 	/**
 	 * Launch the application.
@@ -42,7 +46,7 @@ public class BoardView extends JFrame {
 	public BoardView(int board_size, double prob, int step_num, double duration, boolean wraparound) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		setLayout(new BorderLayout());
+		getContentPane().setLayout(new BorderLayout());
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -62,22 +66,26 @@ public class BoardView extends JFrame {
 		info_panel.add(lblGenerationValue);
 		
 		JPanel board_panel = new JPanel();
+		board_panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		board_panel.setBounds(6, 38, 444, 294);
 		contentPane.add(board_panel, BorderLayout.CENTER);
 		
-		BlinkyPane blinky = new BlinkyPane();
+		game = new Board(board_size, prob);
+		wrap_around = wraparound;
+		
+		BlinkyPane blinky = new BlinkyPane(board_size, step_num, duration);
 		
 		board_panel.add(blinky);
 	}
 	
 	protected class BlinkyPane extends JPanel {
 
-        private JLabel[] labels = new JLabel[100 * 100];
-		private Board game = new Board(100);
+        private JLabel[] labels;
 		private int generationConuter = 0;
 
-        public BlinkyPane() {
-            setLayout(new GridLayout(100, 100));
+        public BlinkyPane(int size, int step_num, double duration) {
+        	labels = new JLabel[size * size];
+            setLayout(new GridLayout(size, size));
             
         	for (int i = 0; i < labels.length; i++) {
     		    JLabel label = new JLabel();
@@ -92,11 +100,11 @@ public class BoardView extends JFrame {
     		    add(labels[i]);
     		}
 
-            Timer timer = new Timer(1000, new ActionListener() {
+            Timer timer = new Timer((int)(duration * 1000), new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                 	lblGenerationValue.setText(Integer.toString(generationConuter));
-                	game.step(generationConuter,true);
+                	game.step(generationConuter,wrap_around);
                 	generationConuter++;
                 	for (int i = 0; i < labels.length; i++) {
                 		Color color = Color.WHITE;
@@ -113,6 +121,10 @@ public class BoardView extends JFrame {
             timer.setRepeats(true);
             timer.setCoalesce(true);
             timer.start();
+            
+            if ((step_num > 0) && (generationConuter > step_num)){
+            	timer.stop();
+            }
         }
 
         @Override
