@@ -1,13 +1,19 @@
 package bio_ex1;
 
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JButton;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -50,9 +56,14 @@ public class Main {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setTitle("The circle of life");
+		frame.setResizable(false);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.getContentPane().setBackground(new Color(200,200,200));
+		
+		
 		
 		JButton btnRun = new JButton("run");
 		btnRun.addActionListener(new ActionListener() {
@@ -66,7 +77,7 @@ public class Main {
 				board_view.setVisible(true);
 			}
 		});
-		btnRun.setBounds(48, 213, 117, 29);
+		btnRun.setBounds(150, 233, 117, 29);
 		frame.getContentPane().add(btnRun);
 		
 		JLabel lblBoardSize = new JLabel("Board Size:");
@@ -74,7 +85,7 @@ public class Main {
 		frame.getContentPane().add(lblBoardSize);
 		
 		txtBoardSize = new JTextField();
-		txtBoardSize.setBounds(78, 11, 45, 28);
+		txtBoardSize.setBounds(150, 11, 45, 28);
 		frame.getContentPane().add(txtBoardSize);
 		txtBoardSize.setColumns(10);
 		txtBoardSize.setText("100");
@@ -84,7 +95,7 @@ public class Main {
 		frame.getContentPane().add(lblFillProb);
 		
 		txtProb = new JTextField();
-		txtProb.setBounds(78, 50, 134, 28);
+		txtProb.setBounds(150, 50, 134, 28);
 		frame.getContentPane().add(txtProb);
 		txtProb.setColumns(10);
 		txtProb.setText("0.5");
@@ -95,7 +106,7 @@ public class Main {
 		
 		txtStepNumber = new JTextField();
 		txtStepNumber.setText("stepNo");
-		txtStepNumber.setBounds(78, 98, 134, 28);
+		txtStepNumber.setBounds(150, 98, 134, 28);
 		frame.getContentPane().add(txtStepNumber);
 		txtStepNumber.setColumns(10);
 		txtStepNumber.setText("-1");
@@ -106,13 +117,13 @@ public class Main {
 		
 		txtStepDuration = new JTextField();
 		txtStepDuration.setText("step duration");
-		txtStepDuration.setBounds(78, 144, 134, 28);
+		txtStepDuration.setBounds(150, 144, 134, 28);
 		frame.getContentPane().add(txtStepDuration);
 		txtStepDuration.setColumns(10);
 		txtStepDuration.setText("0.5");
 		
 		chckbxWraparound = new JCheckBox("wraparound");
-		chckbxWraparound.setBounds(6, 184, 128, 23);
+		chckbxWraparound.setBounds(150, 190, 128, 23);
 		frame.getContentPane().add(chckbxWraparound);
 		
 
