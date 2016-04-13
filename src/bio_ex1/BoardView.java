@@ -45,12 +45,16 @@ public class BoardView extends JFrame {
 	 */
 	public BoardView(int board_size, double prob, int step_num, double duration, boolean wraparound) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(300, 550, 480, 400);
+		setTitle("Circle Of Life");
+		setLocationRelativeTo(null);
+
 		getContentPane().setLayout(new BorderLayout());
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+//		contentPane.setLocation(this);
 		
 		JPanel info_panel = new JPanel();
 		info_panel.setBounds(6, 6, 438, 25);
@@ -72,10 +76,10 @@ public class BoardView extends JFrame {
 		
 		game = new Board(board_size, prob);
 		wrap_around = wraparound;
-		
+
 		BlinkyPane blinky = new BlinkyPane(board_size, step_num, duration);
 		
-		board_panel.add(blinky);
+		board_panel.add(blinky, BorderLayout.CENTER);
 	}
 	
 	protected class BlinkyPane extends JPanel {
