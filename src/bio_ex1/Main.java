@@ -90,7 +90,7 @@ public class Main {
 		txtBoardSize.setColumns(10);
 		txtBoardSize.setText("100");
 		
-		JLabel lblFillProb = new JLabel("Init Prob");
+		JLabel lblFillProb = new JLabel("Init Prob:");
 		lblFillProb.setBounds(6, 56, 61, 16);
 		frame.getContentPane().add(lblFillProb);
 		
@@ -105,14 +105,14 @@ public class Main {
 		frame.getContentPane().add(lblStepNo);
 		
 		txtStepNumber = new JTextField();
-		txtStepNumber.setText("stepNo");
+		txtStepNumber.setText("stepNo:");
 		txtStepNumber.setBounds(150, 98, 134, 28);
 		frame.getContentPane().add(txtStepNumber);
 		txtStepNumber.setColumns(10);
 		txtStepNumber.setText("-1");
 		
-		JLabel lblStepDuration = new JLabel("Step Duration");
-		lblStepDuration.setBounds(6, 150, 61, 16);
+		JLabel lblStepDuration = new JLabel("Step Duration::");
+		lblStepDuration.setBounds(6, 150, 100, 16);
 		frame.getContentPane().add(lblStepDuration);
 		
 		txtStepDuration = new JTextField();

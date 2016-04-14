@@ -48,6 +48,7 @@ public class BoardView extends JFrame {
 		setBounds(300, 550, 480, 400);
 		setTitle("Circle Of Life");
 		setLocationRelativeTo(null);
+		setResizable(false);
 
 		getContentPane().setLayout(new BorderLayout());
 		contentPane = new JPanel();

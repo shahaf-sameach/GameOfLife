@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Board {
 	private final static int DEF_SIZE = 100;
-	private final static float DEF_PROBABILITY = 0.5;
+	private final static double DEF_PROBABILITY = 0.5;
 
 	private int size;
 	private boolean[][] board;
@@ -34,10 +34,12 @@ public class Board {
 			}
 		}
 	}
-	private float getRand() {
+	
+	private double getRand() {
 		Random r = new Random();
-		return r.getFloat();
+		return r.nextDouble();
 	}
+	
 	public void draw() {
 		String baordLayout ="";
 		for(int i=0; i<this.size; i++) {
@@ -57,7 +59,6 @@ public class Board {
 	}
 	
 	public void step(int generation, boolean wrap){
-		position = position % size;
 		int step_type = generation % 2;
 		for(int i=step_type; i<size-1; i=i+2) {
 			for(int j=step_type; j<size-1; j=j+2) {
