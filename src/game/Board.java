@@ -1,4 +1,4 @@
-package bio_ex1;
+package game;
 
 import java.util.Random;
 
